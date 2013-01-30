@@ -89,7 +89,7 @@ It can contain any number of symbols, which will be repeated."
                      (propertize bullet-string
                                  'face face
                                  'local-map map)
-                     (propertize " "
+                     (propertize ""
                                  'local-map map)))
     (overlay-put overlay 'is-bullet t)
     (push overlay org-bullet-overlays)))
@@ -115,7 +115,7 @@ It can contain any number of symbols, which will be repeated."
           (goto-char (match-beginning 0))
           (if (save-match-data (looking-at "^\\*+ "))
               (let ((counter (1- (org-bullets-match-length))))
-                (while (looking-at "[* ]")
+                (while (looking-at "[*]")
                   (org-bullets-make-star
                    bullet-string counter)
                   (forward-char)
