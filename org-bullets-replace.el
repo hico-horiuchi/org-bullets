@@ -29,8 +29,8 @@
   (setq start-automatic-position (+ 1 (count-lines 1 (point))))
   (goto-char (point-min))
   (if (re-search-forward "^[◎○●・]" nil t)
-      (tmng-trance-tmng-to-org)
-      (tmng-trance-org-to-tmng))
+      (circle-to-org-bullets)
+      (org-bullets-to-circle))
   (goto-line start-automatic-position))
 
 (provide 'org-bullets-replace)
