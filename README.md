@@ -16,6 +16,11 @@ Open file and replace circle with org-bullets:
 
     M-x org-bullets-import
 
+#### Export file
+Replace org-bullets with circle and save file:
+
+    M-x org-bullets-export
+
 #### Trance bullets
 When you replace bullets with circle, or circle with bullets:
 

@@ -41,4 +41,12 @@
   (org-mode)
   (org-bullets-mode))
 
+(defun org-bullets-export (export-file)
+  (interactive "FExport file: ")
+  (show-all)
+  (add-hook 'before-save-hook 'org-bullets-trance-to)
+  (write-file export-file)
+  (remove-hook 'before-save-hook 'org-bullets-trance-to)
+  (text-mode))
+
 (provide 'org-bullets-trance)
