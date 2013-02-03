@@ -24,7 +24,6 @@
   (replace-regexp "^\\*\\*\\*\\* " "・ ")
   (goto-line start-position))
 
-
 (defun org-bullets-trance-automatic ()
   (interactive)
   (setq start-automatic-position (+ 1 (count-lines 1 (point))))
@@ -33,5 +32,13 @@
       (org-bullets-trance-from)
       (org-bullets-trance-to))
   (goto-line start-automatic-position))
+
+(defun org-bullets-import (import-file)
+  (interactive "FImport file: ")
+  (add-hook 'find-file-hook 'org-bullets-trance-from)
+  (find-file import-file)
+  (remove-hook 'find-file-hook 'org-bullets-trance-from)
+  (org-mode)
+  (org-bullets-mode))
 
 (provide 'org-bullets-trance)
