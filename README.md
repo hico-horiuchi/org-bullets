@@ -11,7 +11,7 @@ Copy the file somewhere in your load-path, then add to your .emacs:
 
 select, do [M-x eval-region]. The *s will be replaced with circle bullets next time you open an org file
 
-<h4>Replace bullets</h4>
+<h4>Trance bullets</h4>
 When you replace bullets with circle, or circle to bullets:
 
-    M-x org-bullets-replace
+    M-x org-bullets-trance-automatic

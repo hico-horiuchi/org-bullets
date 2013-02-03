@@ -27,7 +27,7 @@
 
 ;;; Code:
 
-(require 'org-bullets-replace)
+(require 'org-bullets-trance)
 (eval-when-compile (require 'cl))
 
 (defgroup org-bullets nil

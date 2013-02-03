@@ -1,4 +1,4 @@
-(defun org-bullets-to-circle ()
+(defun org-bullets-trance-from ()
   (interactive)
   (setq start-position (+ 1 (count-lines 1 (point))))
   (goto-char (point-min))
@@ -11,7 +11,7 @@
   (replace-regexp "^・ " "**** ")
   (goto-line start-position))
 
-(defun circle-to-org-bullets ()
+(defun org-bullets-trance-to ()
   (interactive)
   (setq start-position (+ 1 (count-lines 1 (point))))
   (goto-char (point-min))
@@ -24,13 +24,14 @@
   (replace-regexp "^\\*\\*\\*\\* " "・ ")
   (goto-line start-position))
 
-(defun org-bullets-replace ()
+
+(defun org-bullets-trance-automatic ()
   (interactive)
   (setq start-automatic-position (+ 1 (count-lines 1 (point))))
   (goto-char (point-min))
-  (if (re-search-forward "^[◎○●・]" nil t)
-      (circle-to-org-bullets)
-      (org-bullets-to-circle))
+  (if (re-search-forward "^[◎○●・] " nil t)
+      (org-bullets-trance-from)
+      (org-bullets-trance-to))
   (goto-line start-automatic-position))
 
-(provide 'org-bullets-replace)
+(provide 'org-bullets-trance)
