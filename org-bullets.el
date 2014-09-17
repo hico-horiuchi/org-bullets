@@ -75,16 +75,36 @@ Should this be undesirable, one can remove them with
              (length org-bullets-bullet-list))
         org-bullets-bullet-list)))
 
+(defun org-bullets-export (path)
+  "Export to bullets style text file."
+  (interactive "FExport file: ")
+  (let* ((current-buffer-string (buffer-string)))
+    (with-temp-buffer
+      (insert current-buffer-string)
+      (goto-char (point-min))
+      (while (re-search-forward "^\\*+ " nil t)
+        (let ((level (- (match-end 0) (match-beginning 0) 1)))
+          (replace-match
+           (concat (string (org-bullets-level-char level)) " "))))
+      (write-file path))))
+
+(defun org-bullets-import (path)
+  "Import to bullets style text file."
+  (interactive "fImport file: ")
+  (find-file path)
+  (org-mode)
+  (org-bullets-mode))
+
 ;;;###autoload
 (define-minor-mode org-bullets-mode
   "Circle Bullets for org-mode"
   nil nil nil
   (let* (( keyword
            `(("^\\*+ "
-              (0 (let* (( level (- (match-end 0) (match-beginning 0) 1))
-                        ( is-inline-task
-                          (and (boundp 'org-inlinetask-min-level)
-                               (>= level org-inlinetask-min-level))))
+              (0 (let* ((level (- (match-end 0) (match-beginning 0) 1))
+                        (is-inline-task
+                         (and (boundp 'org-inlinetask-min-level)
+                              (>= level org-inlinetask-min-level))))
                    (compose-region (match-beginning 0)
                                    (- (match-end 0) 1)
                                    (org-bullets-level-char level))
