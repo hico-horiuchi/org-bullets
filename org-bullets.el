@@ -91,9 +91,16 @@ Should this be undesirable, one can remove them with
 (defun org-bullets-import (path)
   "Import to bullets style text file."
   (interactive "fImport file: ")
-  (find-file path)
-  (org-mode)
-  (org-bullets-mode))
+  (insert
+   (with-temp-buffer
+     (insert-file-contents path)
+     (goto-char (point-min))
+     (dolist (bullet org-bullets-bullet-list)
+       (let* ((index (position bullet org-bullets-bullet-list))
+              (org-section (make-string (+ index 1) ?*)))
+         (while (re-search-forward (concat "^" bullet " ") nil t)
+           (replace-match (concat org-section " ")))))
+     (buffer-string))))
 
 ;;;###autoload
 (define-minor-mode org-bullets-mode
